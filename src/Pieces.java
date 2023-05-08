@@ -1,13 +1,10 @@
 public class Pieces {
 
-    int amount;
+    static int amount;
     String color;
 
-    public Pieces(String color) {
-        // construct piece, initially not a king
-        //assign piece either red or black
-
-        amount = 12;
+    public Pieces() {
+        // construct piece
     }
 
     public int getAmount(){
@@ -16,6 +13,10 @@ public class Pieces {
 
     public String getColor(){
         return color;
+    }
+
+    public static void removePiece(){
+        amount --;
     }
 
     /**
@@ -56,23 +57,15 @@ public class Pieces {
         }
     }
 
-
-
-
-
-
     /**
-     * moves a piece to a new position
-     * @param curX current x coordinate of the piece
-     * @param curY current y coordinate of the piece
-     * @param newX new x coordinate of the piece
-     * @param newY new y coordinate of the piece
+     * check to see if the player is moving their piece to a valid index
+     *
+     * @return whether the player can move their piece in the place they chose
      */
-    public void move(int curX, int curY, int newX, int newY) {
-        // if there is a piece already in the desired position:
-        // if it is their own piece: will be asked to try again
-        // if the opponents piece can not be "jumped over": will be asked to try again
-        // if the opponents piece can "jump over it": will call jump method
-        //TODO: implement method and add exception if the move isn't valid
+    public boolean validMove(){
+        //TODO: implement this
+        return false;
     }
+
+
 }

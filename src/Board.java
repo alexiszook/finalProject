@@ -9,10 +9,10 @@ public class Board {
     /**
      * 2D array representing the state of the checkers board
      */
-    private char[][] currentBoard = new char[DIMEN][DIMEN];
+    private static char[][] currentBoard = new char[DIMEN][DIMEN];
 
     /**
-     * creates an initial checkers board with x's and o's as pieces
+     * creates an initial checkers board with r's and b's as pieces
      */
     public Board() {
         // Checkerboard constructor
@@ -35,6 +35,39 @@ public class Board {
             currentBoard[i][6] = 'b';
         }
 
+    }
+
+    /**
+     * moves a piece to a new position
+     * @param curX current x coordinate of the piece
+     * @param curY current y coordinate of the piece
+     * @param newX new x coordinate of the piece
+     * @param newY new y coordinate of the piece
+     */
+    public static void move(char turn, int curX, int curY, int newX, int newY) {
+        // if there is a piece already in the desired position:
+        // if it is their own piece: will be asked to try again
+        // if the opponents piece can not be "jumped over": will be asked to try again
+        // if the opponents piece can "jump over it": will call jump method
+        //TODO: implement method and add exception if the move isn't valid
+
+        // Change appropriate board elements and decrement redcheckers or
+        // blackcheckers if necessary.
+
+        //replace old space with _ and fill new space with piece
+        currentBoard[curX][curY] = '_';
+        currentBoard[newX][newY] = turn;
+
+        //check to see if a piece is being jumped and update board and piece amounts accordingly
+        if (Math.abs(curX - newX) == 2) {
+            currentBoard[(curX+newX)/2][(curY+newY)/2] = '_';
+            if (turn == 'r') {
+                Red.removePiece();
+            }
+            else {
+                Black.removePiece();
+            }
+        }
     }
 
     /**
@@ -77,17 +110,4 @@ public class Board {
 
     }
 
-
-    public void remove(){
-        //TODO: implement this method
-
-        //will remove opponent's piece when it is jumped and update amount
-    }
-
-    public void jump() {
-        //TODO: implement this method/decide if it's needed
-
-        // will move the piece "two over" and "jump" over opponent's piece
-        // the opponents piece will be deleted from the board
-    }
 }
