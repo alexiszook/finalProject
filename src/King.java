@@ -1,6 +1,9 @@
 public class King extends Pieces{
 
-    public King(String color){
+    //position
+    int x;
+    int y;
+    public King(String color, int x, int y){
         super(color);
         //create a King piece
         //should be the same color as the piece it changed into a King

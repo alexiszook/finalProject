@@ -37,7 +37,26 @@ public class Board {
 
     }
 
+    /**
+     * creates a king piece when a piece reaches the other end, and it makes the piece capitalized to represent this
+     *
+     * @param color of the piece
+     * @param x coordinate of piece
+     * @param y coordinate of piece
+     */
 
+    //need to run this after each move to check and see if a king needs to be made
+    public void isKing(String color, int x, int y) {
+        //TODO: implement this method
+        if((currentBoard[x][y] == ('r')) && (y == 8)){
+            King king = new King("red", x, y);
+            currentBoard [x][y] = 'R';
+        } else if((currentBoard[x][y] == ('b')) && (y == 1)){
+            King king = new King("black", x, y);
+            currentBoard[x][y] = 'B';
+        }
+
+    }
 
     /**
      * updates and prints board after a player's turn

@@ -56,13 +56,10 @@ public class Pieces {
         }
     }
 
-    public boolean isKing(int number) {
-        //TODO: implement this method
 
-        // will return false if piece is on its opponent's first row
-        // will also initialize piece(int number) as king
-        return false;
-    }
+
+
+
 
     /**
      * moves a piece to a new position
