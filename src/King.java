@@ -11,8 +11,24 @@ public class King extends Pieces{
     //Kings have different valid moves than regular pieces
     @Override
     public boolean validMove(){
+       Board board = new Board();
+        int xJump = x+1;
+        int yJump = y+1;
         //TODO: implement this
-        return false;
+        if (x < curX) {
+            xJump = x - 1;
+        }
+        if (y < curY) {
+            yJump = y - 1;
+        }
+
+        if (board.getSpace(x,y) == 'r' || board.getSpace(x,y) == 'b') {
+            return false;
+        } else if (board.getSpace(xJump,yJump) == 'r' || board.getSpace(xJump,yJump) == 'b') {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 }
