@@ -7,27 +7,28 @@ public class Pieces {
         // construct piece
     }
 
-    public int getAmount(){
+    public int getAmount() {
         return amount;
     }
 
-    public String getColor(){
+    public String getColor() {
         return color;
     }
 
-    public static void removePiece(){
-        amount --;
+    public static void removePiece() {
+        amount--;
     }
 
     /**
      * checks to see if the player has won by seeing if the given losing color has lost
+     *
      * @return true if the player has won
      */
 
     public boolean hasWon(Pieces loser) {
-        if(loser.hasLost()){
+        if (loser.hasLost()) {
             return true;
-        }else{
+        } else {
             return false;
         }
 
@@ -35,24 +36,24 @@ public class Pieces {
 
     /**
      * checks if that color has 0 pieces left and therefore has lost
+     *
      * @return true if the color has 0 pieces left
      */
     public boolean hasLost() {
         //sees who the supposed winner is
-        if(color.equals("red")) {
+        if (color.equals("red")) {
             if (amount == 0) {
                 return true;
             } else {
                 return false;
             }
-        }
-        else if(color.equals("black")){
-            if(amount == 0){
+        } else if (color.equals("black")) {
+            if (amount == 0) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
-        } else{
+        } else {
             return false;
         }
     }
@@ -62,10 +63,36 @@ public class Pieces {
      *
      * @return whether the player can move their piece in the place they chose
      */
-    public boolean validMove(){
+    public static boolean validMove(char turn, int curX, int curY, int newX, int newY) {
         //TODO: implement this
-        return false;
-    }
 
+        // Checks case of regular move
+        if (Math.abs(curX - newX) == 1) {
+            if ((turn == 'r') && (newY - curY == 1)) {
+                return true;
+            } else if ((turn == 'b') && (newY - curY == -1)) {
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        // Checks case of a jump
+        else if (Math.abs(curX - newX) == 2) {
+            if (turn == 'r' && (newY - curY == 2) && ((Board.getSpace((curX + newX) / 2, (curY + newY) / 2) == 'b')
+                    || Board.getSpace((curX + newX) / 2, (curY + newY) / 2) == 'B')) {
+                return true;
+            } else if (turn == 'b' && (newY - curY == -2) && ((Board.getSpace((curX + newX) / 2, (curY + newY) / 2) == 'r')
+                    || Board.getSpace((curX + newX) / 2, (curY + newY) / 2) == 'R')) {
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else {
+                return false;
+        }
+    }
 
 }
