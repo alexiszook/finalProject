@@ -80,7 +80,6 @@ public class Board {
 
     //need to run this after each move to check and see if a king needs to be made
     public void isKing(String color, int x, int y) {
-        //TODO: implement this method
         if((currentBoard[x][y] == ('r')) && (y == 8)){
             King king = new King("red", x, y);
             currentBoard [x][y] = 'R';
@@ -89,6 +88,10 @@ public class Board {
             currentBoard[x][y] = 'B';
         }
 
+    }
+
+    public char getSpace(int x, int y){
+        return currentBoard[x][y];
     }
 
     /**
