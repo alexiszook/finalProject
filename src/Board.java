@@ -54,6 +54,9 @@ public class Board {
         // Change appropriate board elements and decrement redcheckers or
         // blackcheckers if necessary.
 
+        if(Pieces.validMove(turn, curX, curY, newX, newY)){
+
+        }
         //replace old space with _ and fill new space with piece
         currentBoard[curX][curY] = '_';
         currentBoard[newX][newY] = turn;
@@ -78,13 +81,22 @@ public class Board {
      */
 
     //need to run this after each move to check and see if a king needs to be made
-    public void isKing(String color, int x, int y) {
+    public void king(String color, int x, int y) {
         if((currentBoard[x][y] == ('r')) && (y == 8)){
             King king = new King("red", x, y);
             currentBoard [x][y] = 'R';
         } else if((currentBoard[x][y] == ('b')) && (y == 1)){
             King king = new King("black", x, y);
             currentBoard[x][y] = 'B';
+        }
+
+    }
+
+    public boolean isKing(int x, int y){
+        if(currentBoard[x][y] == 'R' || currentBoard[x][y] == 'B'){
+            return true;
+        } else{
+            return false;
         }
 
     }
