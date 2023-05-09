@@ -59,14 +59,13 @@ public class Board {
         currentBoard[newX][newY] = turn;
 
         //check to see if a piece is being jumped and update board and piece amounts accordingly
-        if (Math.abs(curX - newX) == 2) {
-            currentBoard[(curX+newX)/2][(curY+newY)/2] = '_';
-            if (turn == 'r') {
-                Red.removePiece();
-            }
-            else {
-                Black.removePiece();
-            }
+        if (Math.abs(curX-curY)==2) {
+            if (turn == 'r' && (newY - curY == 2) &&
+                    currentBoard[(curX+newX)/2][(curY + newY)/2] == 'b')
+                Black.amount--;
+            else if (turn == 'b' && (newX - curX == -2) &&
+                    currentBoard[(curX+newX)/2][(curY+newY)/2] == 'r')
+                Red.amount--;
         }
     }
 
@@ -90,7 +89,7 @@ public class Board {
 
     }
 
-    public char getSpace(int x, int y){
+    public static char getSpace(int x, int y){
         return currentBoard[x][y];
     }
 
