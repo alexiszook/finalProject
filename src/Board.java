@@ -44,31 +44,14 @@ public class Board {
      * @param newX new x coordinate of the piece
      * @param newY new y coordinate of the piece
      */
-    public static void move(char turn, int curX, int curY, int newX, int newY) {
-        // if there is a piece already in the desired position:
-        // if it is their own piece: will be asked to try again
-        // if the opponents piece can not be "jumped over": will be asked to try again
-        // if the opponents piece can "jump over it": will call jump method
-        //TODO: implement method and add exception if the move isn't valid
+    public static void move(char turn, int curX, int curY, int newX, int newY) throws Exception {
+        if (Pieces.validMove(turn, curX, curY, newX, newY)) {
+            //replace old space with _ and fill new space with piece
+            currentBoard[curX][curY] = '_';
+            currentBoard[newX][newY] = turn;
 
-        // Change appropriate board elements and decrement redcheckers or
-        // blackcheckers if necessary.
-
-        if(Pieces.validMove(turn, curX, curY, newX, newY)){
-
-        }
-        //replace old space with _ and fill new space with piece
-        currentBoard[curX][curY] = '_';
-        currentBoard[newX][newY] = turn;
-
-        //check to see if a piece is being jumped and update board and piece amounts accordingly
-        if (Math.abs(curX-curY)==2) {
-            if (turn == 'r' && (newY - curY == 2) &&
-                    currentBoard[(curX+newX)/2][(curY + newY)/2] == 'b')
-                Black.amount--;
-            else if (turn == 'b' && (newX - curX == -2) &&
-                    currentBoard[(curX+newX)/2][(curY+newY)/2] == 'r')
-                Red.amount--;
+        } else{
+            throw new Exception();
         }
     }
 
@@ -105,15 +88,19 @@ public class Board {
         return currentBoard[x][y];
     }
 
+    public static void setSpace(char c, int x, int y){
+        currentBoard[x][y] = c;
+    }
+
     /**
      * updates and prints board after a player's turn
      *
      * @return current game board
      */
     public void printBoard(){
-                System.out.println("  1 2 3 4 5 6 7 8 x");
+                System.out.println("  0 1 2 3 4 5 6 7 x");
         for (int i=0;i<DIMEN;i++) {
-            System.out.print((i+1) + " ");
+            System.out.print((i) + " ");
             for (int j=0;j<DIMEN;j++) {
                 System.out.print(currentBoard[j][i] + " ");
             }

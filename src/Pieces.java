@@ -1,17 +1,18 @@
 public class Pieces {
 
     static int amount;
-    String color;
+    static String color;
 
     public Pieces() {
         // construct piece
     }
 
-    public int getAmount() {
+    public static int getAmount() {
         return amount;
     }
 
-    public String getColor() {
+
+    public static String getColor() {
         return color;
     }
 
@@ -64,13 +65,11 @@ public class Pieces {
      * @return whether the player can move their piece in the place they chose
      */
     public static boolean validMove(char turn, int curX, int curY, int newX, int newY) {
-        //TODO: implement this
-
-        // Checks case of regular move
-        if (Math.abs(curX - newX) == 1) {
-            if ((turn == 'r') && (newY - curY == 1)) {
+         // Checks case of regular move
+        if (Math.abs(curX - newX) == 1 && Board.getSpace(newX,newY) == '_') {
+            if ((turn == 'r') && (newY - curY == 1) && Board.getSpace(curX,curY) == 'r') {
                 return true;
-            } else if ((turn == 'b') && (newY - curY == -1)) {
+            } else if ((turn == 'b') && (newY - curY == -1) && Board.getSpace(curX,curY) == 'b') {
                 return true;
             }
             else{
@@ -81,9 +80,13 @@ public class Pieces {
         else if (Math.abs(curX - newX) == 2) {
             if (turn == 'r' && (newY - curY == 2) && ((Board.getSpace((curX + newX) / 2, (curY + newY) / 2) == 'b')
                     || Board.getSpace((curX + newX) / 2, (curY + newY) / 2) == 'B')) {
+                Board.setSpace('_',(curX + newX) / 2, (curY + newY) / 2);
+                Black.amount --;
                 return true;
             } else if (turn == 'b' && (newY - curY == -2) && ((Board.getSpace((curX + newX) / 2, (curY + newY) / 2) == 'r')
                     || Board.getSpace((curX + newX) / 2, (curY + newY) / 2) == 'R')) {
+                Board.setSpace('_',(curX + newX) / 2, (curY + newY) / 2);
+                Red.amount--;
                 return true;
             }
             else{

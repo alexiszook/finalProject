@@ -1,35 +1,55 @@
 import java.util.Scanner;
 
 public class Game {
+    private Board gameBoard;
+    private char whoseTurn;
+    private String colorTurn = "black";
+    private Pieces red = new Red();
+    private Pieces black = new Black();
     public Game() {
         // will call Board class and use those methods
         // will construct the "AI" computer opponent
+        this.gameBoard = new Board();
+        whoseTurn = 'b';
     }
 
 
-    public static void main(String[] args){
-        char whoseTurn = 'b';
-        Board board = new Board();
-        Pieces red = new Red();
-        Pieces black = new Black();
-        board.printBoard();
+    public void gameLoop() throws Exception {
+        gameBoard.printBoard();
         Scanner scnr = new Scanner(System.in);
-        System.out.println("Black goes first.");
-        System.out.println("Enter the space(x,y) of the piece you want to move");
-        System.out.println("(ex. x=1, y=2 would be entered as 1 2)");
-        System.out.println("Enter the space you want the piece to move to in the same format");
-        Board.move(whoseTurn, scnr.nextInt(), scnr.nextInt(), scnr.nextInt(), scnr.nextInt());
 
         while(!black.hasLost() && !red.hasLost()) {
             //TODO: finish the actual playing of the game
+            try{
+                System.out.println("it is " +colorTurn + "'s turn");
+                System.out.println("Enter the space(x,y) of the piece you want to move");
+                System.out.println("(ex. x=1, y=2 would be entered as 1 2)");
+                System.out.println("Enter the space you want the piece to move to in the same format");
+                gameBoard.move(whoseTurn, scnr.nextInt(), scnr.nextInt(), scnr.nextInt(), scnr.nextInt());
+                gameBoard.printBoard();
 
-            //switch turns
-            if(whoseTurn == 'b'){
-                whoseTurn = 'r';
-            }else{
-                whoseTurn = 'b';
+                //switch turns
+                if(whoseTurn == 'b'){
+                    whoseTurn = 'r';
+                    colorTurn = "red";
+                }else{
+                    whoseTurn = 'b';
+                    colorTurn = "black";
+                }
             }
+            catch (Exception e){
+                System.out.println("Can't play there, try again");
+            }
+
         }
         }
-    }
+
+        public static void main(String args[]) throws Exception {
+        Game game = new Game();
+        game.gameLoop();
+
+        }
+}
+
+
 
