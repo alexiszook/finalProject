@@ -45,11 +45,24 @@ public class Board {
      * @param newY new y coordinate of the piece
      */
     public static void move(char turn, int curX, int curY, int newX, int newY) throws Exception {
-        if (Pieces.validMove(turn, curX, curY, newX, newY)) {
+        if(Board.isKing(curX, curY)){
+            char kingColor;
+            if(King.validMove(turn, curX, curY, newX, newY)){
+                if(turn == 'r'){
+                    kingColor = 'R';
+                }else{
+                    kingColor = 'B';
+                }
+                currentBoard[curX][curY] = '_';
+                currentBoard[newX][newY] = kingColor;
+            }
+        }
+        else if(Pieces.validMove(turn, curX, curY, newX, newY)) {
             //replace old space with _ and fill new space with piece
             currentBoard[curX][curY] = '_';
             currentBoard[newX][newY] = turn;
-
+            //check if a king needs to be made
+            Board.king(newX,newY);
         } else{
             throw new Exception();
         }
@@ -58,24 +71,23 @@ public class Board {
     /**
      * creates a king piece when a piece reaches the other end, and it makes the piece capitalized to represent this
      *
-     * @param color of the piece
      * @param x coordinate of piece
      * @param y coordinate of piece
      */
 
     //need to run this after each move to check and see if a king needs to be made
-    public void king(String color, int x, int y) {
-        if((currentBoard[x][y] == ('r')) && (y == 8)){
+    public static void king(int x, int y) {
+        if((currentBoard[x][y] == ('r')) && (y == 7)){
             King king = new King("red", x, y);
             currentBoard [x][y] = 'R';
-        } else if((currentBoard[x][y] == ('b')) && (y == 1)){
+        } else if((currentBoard[x][y] == ('b')) && (y == 0)){
             King king = new King("black", x, y);
             currentBoard[x][y] = 'B';
         }
 
     }
 
-    public boolean isKing(int x, int y){
+    public static boolean isKing(int x, int y){
         if(currentBoard[x][y] == 'R' || currentBoard[x][y] == 'B'){
             return true;
         } else{

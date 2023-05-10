@@ -9,24 +9,50 @@ public class King extends Pieces{
     }
 
     //Kings have different valid moves than regular pieces
-    public static boolean validMove(int curX, int curY, int newX, int newY){
-        int xJump = newX+1;
-        int yJump = newY+1;
-        //TODO: implement this
-        if (newX < curX) {
-            xJump = newX - 1;
+    public static boolean validMove(char turn, int curX, int curY, int newX, int newY){
+        char kingColor;
+        char oppColor;
+        char oppKing;
+        if(turn == 'r'){
+            kingColor = 'R';
+            oppColor = 'b';
+            oppKing = 'B';
+        }else{
+            kingColor = 'B';
+            oppColor = 'r';
+            oppKing = 'R';
         }
-        if (newY < curY) {
-            yJump = newY - 1;
+        if (Math.abs(curX - newX) == 1 && Board.getSpace(newX,newY) == '_') {
+            if ((Math.abs(newY - curY) == 1) && Board.getSpace(curX,curY) == kingColor) {
+                return true;
+            }
+            else{
+                return false;
+            }
         }
+        // Checks case of a jump
+        else if (Math.abs(curX - newX) == 2) {
+            if ((Math.abs(newY - curY) == 2) && ((Board.getSpace((curX + newX) / 2, (curY + newY) / 2) == oppColor)
+                    || Board.getSpace((curX + newX) / 2, (curY + newY) / 2) == oppKing)) {
 
-        if (Board.getSpace(newX,newY) == 'r' || Board.getSpace(newX,newY) == 'b') {
+                Board.setSpace('_',(curX + newX) / 2, (curY + newY) / 2);
+                if(oppColor == 'b') {
+                    Black.amount--;
+                } else {
+                    Red.amount--;
+                }
+
+                return true;
+            }
+
+            else{
+                return false;
+            }
+        }
+        else {
             return false;
-        } else if (Board.getSpace(xJump,yJump) == 'r' || Board.getSpace(xJump,yJump) == 'b') {
-            return false;
-        } else {
-            return true;
         }
     }
+
 
 }
