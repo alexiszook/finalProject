@@ -1,39 +1,17 @@
 public class Pieces {
-
-    static int amount;
     static String color;
 
     public Pieces() {
         // construct piece
     }
 
-    public static int getAmount() {
-        return amount;
-    }
+
 
 
     public static String getColor() {
         return color;
     }
 
-    public static void removePiece() {
-        amount--;
-    }
-
-    /**
-     * checks to see if the player has won by seeing if the given losing color has lost
-     *
-     * @return true if the player has won
-     */
-
-    public boolean hasWon(Pieces loser) {
-        if (loser.hasLost()) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
 
     /**
      * checks if that color has 0 pieces left and therefore has lost
@@ -43,13 +21,13 @@ public class Pieces {
     public boolean hasLost() {
         //sees who the supposed winner is
         if (color.equals("red")) {
-            if (amount == 0) {
+            if (Red.getAmount() == 0) {
                 return true;
             } else {
                 return false;
             }
         } else if (color.equals("black")) {
-            if (amount == 0) {
+            if (Black.getAmount() == 0) {
                 return true;
             } else {
                 return false;
@@ -81,12 +59,12 @@ public class Pieces {
             if (turn == 'r' && (newY - curY == 2) && ((Board.getSpace((curX + newX) / 2, (curY + newY) / 2) == 'b')
                     || Board.getSpace((curX + newX) / 2, (curY + newY) / 2) == 'B')) {
                 Board.setSpace('_',(curX + newX) / 2, (curY + newY) / 2);
-                Black.amount --;
+                Black.updateAmount();
                 return true;
             } else if (turn == 'b' && (newY - curY == -2) && ((Board.getSpace((curX + newX) / 2, (curY + newY) / 2) == 'r')
                     || Board.getSpace((curX + newX) / 2, (curY + newY) / 2) == 'R')) {
                 Board.setSpace('_',(curX + newX) / 2, (curY + newY) / 2);
-                Red.amount--;
+                Red.updateAmount();
                 return true;
             }
             else{

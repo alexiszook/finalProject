@@ -37,9 +37,9 @@ public class King extends Pieces{
 
                 Board.setSpace('_',(curX + newX) / 2, (curY + newY) / 2);
                 if(oppColor == 'b') {
-                    Black.amount--;
+                    Black.updateAmount();
                 } else {
-                    Red.amount--;
+                    Red.updateAmount();
                 }
 
                 return true;
