@@ -1,13 +1,18 @@
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class Game {
     private Board gameBoard;
+
+    Queue<String> players;
+
     private char whoseTurn;
-    private String colorTurn = "black";
     private Pieces red = new Red();
     private Pieces black = new Black();
     public Game() {
         this.gameBoard = new Board();
+        players = new LinkedList<>();
         whoseTurn = 'b';
     }
 
@@ -18,25 +23,31 @@ public class Game {
      */
     public void gameLoop() {
         gameBoard.printBoard();
+        //add players to queue
+        players.add("black");
+        players.add("red");
+
         Scanner scnr = new Scanner(System.in);
 
         while(!black.hasLost() && !red.hasLost()) {
             try{
-                System.out.println("it is " +colorTurn + "'s turn");
+                String player = players.element();
+                System.out.println("it is " + player + "'s turn");
                 System.out.println("Enter the space(x,y) of the piece you want to move");
                 System.out.println("(ex. x=1, y=2 would be entered as 1 2)");
                 System.out.println("Enter the space you want the piece to move to in the same format");
-                gameBoard.move(whoseTurn, scnr.nextInt(), scnr.nextInt(), scnr.nextInt(), scnr.nextInt());
+                Board.move(whoseTurn, scnr.nextInt(), scnr.nextInt(), scnr.nextInt(), scnr.nextInt());
                 gameBoard.printBoard();
 
                 //switch turns
-                if(whoseTurn == 'b'){
+                if(player.equals("black")){
                     whoseTurn = 'r';
-                    colorTurn = "red";
                 }else{
                     whoseTurn = 'b';
-                    colorTurn = "black";
                 }
+                players.remove();
+                players.add(player);
+
             }
             catch (Exception e){
                 System.out.println("Can't play there, try again");

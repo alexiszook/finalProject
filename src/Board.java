@@ -6,6 +6,7 @@ public class Board {
     private static final int DIMEN = 8;
 
 
+
     /**
      * 2D array representing the state of the checkers board
      */
