@@ -74,19 +74,21 @@ public class Board {
      * @param x coordinate of piece
      * @param y coordinate of piece
      */
-
-    //need to run this after each move to check and see if a king needs to be made
     public static void king(int x, int y) {
         if((currentBoard[x][y] == ('r')) && (y == 7)){
-            King king = new King("red", x, y);
             currentBoard [x][y] = 'R';
         } else if((currentBoard[x][y] == ('b')) && (y == 0)){
-            King king = new King("black", x, y);
             currentBoard[x][y] = 'B';
         }
 
     }
 
+    /**
+     * Checks if a checker is a king
+     * @param x coordinate of the checker being checked
+     * @param y coordinate of the checker being checked
+     * @return whether the checker is a king
+     */
     public static boolean isKing(int x, int y){
         if(currentBoard[x][y] == 'R' || currentBoard[x][y] == 'B'){
             return true;
@@ -96,18 +98,30 @@ public class Board {
 
     }
 
+    /**
+     * Gives the character that is in a certain space on the board
+     *
+     * @param x coordinate of the desired space
+     * @param y coordinate of the desired space
+     * @return the character that is in the desired space on the board
+     */
     public static char getSpace(int x, int y){
         return currentBoard[x][y];
     }
 
+    /**
+     * sets a certain space on the board to a new character
+     *
+     * @param c character that is being set in the desired space
+     * @param x coordinate of the desired space
+     * @param y coordinate of the desired space
+     */
     public static void setSpace(char c, int x, int y){
         currentBoard[x][y] = c;
     }
 
     /**
      * updates and prints board after a player's turn
-     *
-     * @return current game board
      */
     public void printBoard(){
                 System.out.println("  0 1 2 3 4 5 6 7 x");

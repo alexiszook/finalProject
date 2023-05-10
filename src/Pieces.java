@@ -1,18 +1,6 @@
 public class Pieces {
     static String color;
 
-    public Pieces() {
-        // construct piece
-    }
-
-
-
-
-    public static String getColor() {
-        return color;
-    }
-
-
     /**
      * checks if that color has 0 pieces left and therefore has lost
      *
@@ -37,13 +25,14 @@ public class Pieces {
         }
     }
 
+
     /**
      * check to see if the player is moving their piece to a valid index
      *
      * @return whether the player can move their piece in the place they chose
      */
     public static boolean validMove(char turn, int curX, int curY, int newX, int newY) {
-         // Checks case of regular move
+        // Checks case of regular move
         if (Math.abs(curX - newX) == 1 && Board.getSpace(newX,newY) == '_') {
             if ((turn == 'r') && (newY - curY == 1) && Board.getSpace(curX,curY) == 'r') {
                 return true;
@@ -72,7 +61,7 @@ public class Pieces {
             }
         }
         else {
-                return false;
+            return false;
         }
     }
 

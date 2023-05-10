@@ -1,17 +1,27 @@
 public class Black extends Pieces {
 
-    static int amount;
+    public static int amount;
+
     public Black() {
         color = "black";
         amount = 12;
     }
 
-    public static int updateAmount(){
-        return amount--;
+    /**
+     * update the amount of black checkers by -1
+     */
+    public static void updateAmount(){
+        amount--;
     }
 
+    /**
+     * amount of black checkers left
+     * @return the amount of black checkers left
+     */
     public static int getAmount() {
         return amount;
     }
+
+
 }
 

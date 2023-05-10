@@ -1,18 +1,20 @@
-public class King extends Pieces{
+public class King {
 
-    //position
-    int x;
-    int y;
-    public King(String color, int x, int y){
-        //create a King piece
-        //should be the same color as the piece it changed into a King
-    }
-
-    //Kings have different valid moves than regular pieces
+    /**
+     * Checks valid moves for Kings
+     * @param turn who's turn it is
+     * @param curX current x coordinate of checker
+     * @param curY current y coordinate of checker
+     * @param newX new x coordinate of checker
+     * @param newY new y coordinate of checker
+     * @return whether the move is valid
+     */
     public static boolean validMove(char turn, int curX, int curY, int newX, int newY){
+
         char kingColor;
         char oppColor;
         char oppKing;
+
         if(turn == 'r'){
             kingColor = 'R';
             oppColor = 'b';
