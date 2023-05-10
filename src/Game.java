@@ -1,11 +1,17 @@
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
 
 public class Game {
     private Board gameBoard;
 
+    /**
+     * LinkedList that keeps track of the next player up
+     */
     Queue<String> players;
+
+    /**
+     * ArrayList that keeps track of all the moves throughout the game
+     */
+    List<Integer> moves;
 
     private char whoseTurn;
     private Pieces red = new Red();
@@ -14,6 +20,23 @@ public class Game {
         this.gameBoard = new Board();
         players = new LinkedList<>();
         whoseTurn = 'b';
+        moves = new ArrayList<>();
+    }
+
+
+    /**
+     * stores the player's move to the moves arraylist
+     *
+     * @param curx x coordinate of the checker being moved
+     * @param cury y coordinate of the checker being moved
+     * @param newx x coordinate where the checker is moving to
+     * @param newy y coordinate where the checker is moving to
+     */
+    public void moveHistory(int curx, int cury, int newx, int newy){
+        int move;
+        //combine all the coordinates into one number by multiplying them by their placeholder
+        move = 1000*curx + 100*cury + 10*newx + newy;
+        moves.add(move);
     }
 
     /**
@@ -36,7 +59,13 @@ public class Game {
                 System.out.println("Enter the space(x,y) of the piece you want to move");
                 System.out.println("(ex. x=1, y=2 would be entered as 1 2)");
                 System.out.println("Enter the space you want the piece to move to in the same format");
-                Board.move(whoseTurn, scnr.nextInt(), scnr.nextInt(), scnr.nextInt(), scnr.nextInt());
+                int curx = scnr.nextInt();
+                int cury = scnr.nextInt();
+                int newx = scnr.nextInt();
+                int newy = scnr.nextInt();
+                Board.move(whoseTurn, curx, cury, newx, newy);
+                moveHistory(curx, cury, newx, newy);
+
                 gameBoard.printBoard();
 
                 //switch turns
@@ -54,10 +83,21 @@ public class Game {
             }
 
         }
+
         if(black.hasLost()){
             System.out.println("Red is the winner!");
+        }else{
+            System.out.println("Black is the winner!");
         }
+
+        System.out.println("would you like to access the log of moves from the game? (Y or N)");
+        if(scnr.next().equals("Y")) {
+            for (int move : moves) {
+                System.out.println(move);
+            }
         }
+
+    }
 
 }
 
