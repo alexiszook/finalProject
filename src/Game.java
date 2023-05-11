@@ -6,12 +6,12 @@ public class Game {
     /**
      * LinkedList that keeps track of the next player up
      */
-    Queue<String> players;
+    private Queue<String> players;
 
     /**
      * ArrayList that keeps track of all the moves throughout the game
      */
-    List<Integer> moves;
+    private List<Integer> moves;
 
     private char whoseTurn;
     private Pieces red = new Red();
