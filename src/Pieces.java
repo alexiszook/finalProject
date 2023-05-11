@@ -1,5 +1,5 @@
 public class Pieces {
-    static String color;
+    public static String color;
 
     /**
      * checks if that color has 0 pieces left and therefore has lost
